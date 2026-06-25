@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js App",
-  description: "Next.js template with Redux and Tailwind",
+  title: 'My Nonprofit — Formation Wizard',
+  description: 'Local-first OSS tool for Pennsylvania nonprofit formation with AI document drafts',
 };
 
 export default function RootLayout({

@@ -1,33 +1,24 @@
-# Next.js Template
+# My Nonprofit — Formation Wizard (Console)
 
-Bare Next.js app with **src/app**, **src/store**, and **src/utils**. Redux and Tailwind are wired; no entity/dashboard/API code.
+Local-first OSS Next.js app for Pennsylvania / Philadelphia nonprofit formation.
 
-## Run
+## Quick start
 
-```bash
-npm install
-npm run dev
-```
+1. Create a Supabase project and run SQL from `../my-nonprofit-express-server/docs/` (see `docs/wire-contract.md`).
+2. Configure and start the Express server (`PORT=3011`).
+3. `npm install && npm run dev` (web on port **3010**).
+4. Visit `/setup`, then `/dashboard` to create a formation case.
 
-Open [http://localhost:3000](http://localhost:3000).
+## Features (v1)
 
-## Architecture & agent rules
+- PA/Philadelphia 12-step checklist with progress tracking
+- Board members and officers
+- AI drafts: mission, articles, bylaws, conflict policy, board consent
+- Filing tracker (manual status — no auto-filing)
+- Markdown export of documents
 
-Follow **`.cursor/rules/AGENTS.md`** and **`.cursor/architecture/`**.
+**Not legal advice.** All AI output is draft material for attorney review.
 
-| Rule | Summary |
-|------|---------|
-| Redux | **Zero selector functions** — `useAppSelector((s) => s.slice)` only; derive with `useMemo` |
-| Routes | **No `[id]`** — use static `/entity-detail-page` + `current*` in Redux |
-| Utils | **Generic** helpers (`date/`, `string/`) — not table-specific formatters |
+## Architecture
 
-## Layout
-
-- **src/app** — routes and layout
-- **src/store** — Redux (store, reducer, one minimal slice)
-- **src/utils** — shared utilities
-- **src/components** — shared UI (e.g. ReduxProvider)
-
-## As GitHub template
-
-Repo → Settings → General → check **Template repository**. Then use as `GITHUB_TEMPLATE_WEB` when creating new web repos from the panel.
+See `.cursor/architecture/` and `.cursor/rules/AGENTS.md`.
