@@ -12,7 +12,7 @@ export const fetchFormationCasesThunk = (): AppThunk<Promise<200 | 400 | 500>> =
   dispatch(DashboardBuilderActions.setDashboardLoading(false));
 
   if (!result.success || !result.data) {
-    dispatch(DashboardBuilderActions.setDashboardError(result.error ?? 'Failed to load cases'));
+    dispatch(DashboardBuilderActions.setDashboardError(result.error ?? 'Failed to load nonprofits'));
     return result.httpStatus === 400 ? 400 : 500;
   }
 

@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     const target =
       process.env.EXPRESS_API_URL?.trim() ||
       process.env.FORMATION_EXPRESS_INTERNAL_URL?.trim() ||
-      (process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3011' : '');
+      (process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3080' : '');
 
     if (!target) {
       return [];

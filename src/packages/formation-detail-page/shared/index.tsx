@@ -38,7 +38,7 @@ export const FormationCaseHeader = () => {
   return (
     <div className={styles.header}>
       <h1 className={styles.title}>{currentCase.working_name || currentCase.legal_name}</h1>
-      <p className={styles.subtitle}>PA / Philadelphia formation · {currentCase.status}</p>
+      <p className={styles.subtitle}>Pennsylvania / Philadelphia formation workspace</p>
     </div>
   );
 };

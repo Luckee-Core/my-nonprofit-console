@@ -1,6 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { appReducer } from './appSlice';
 import dashboardBuilderReducer from './builders/dashboardBuilder';
+import gettingStartedBuilderReducer from './builders/gettingStartedBuilder';
 import formationWizardBuilderReducer from './builders/formationWizardBuilder';
 import setupBuilderReducer from './builders/setupBuilder';
 import currentFormationCaseReducer from './current/currentFormationCase';
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
   formationFilings: formationFilingsReducer,
   currentFormationCase: currentFormationCaseReducer,
   dashboardBuilder: dashboardBuilderReducer,
+  gettingStartedBuilder: gettingStartedBuilderReducer,
   formationWizardBuilder: formationWizardBuilderReducer,
   setupBuilder: setupBuilderReducer,
 });

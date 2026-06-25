@@ -7,6 +7,7 @@ import {
   FORMATION_CHECKLIST_PATH,
   FORMATION_DOCUMENTS_PATH,
   FORMATION_FILINGS_PATH,
+  GETTING_STARTED_PATH,
   LANDING_PATH,
   SETUP_PATH,
 } from '@/config/routes';
@@ -27,11 +28,14 @@ export const AppShell = ({ children, showFormationNav = false }: AppShellProps) 
           My Nonprofit
         </Link>
         <nav className={styles.nav}>
+          <Link href={GETTING_STARTED_PATH} className={styles.navLink}>
+            Get started
+          </Link>
           <Link href={SETUP_PATH} className={styles.navLink}>
             Setup
           </Link>
           <Link href={DASHBOARD_PATH} className={styles.navLink}>
-            Dashboard
+            Your nonprofits
           </Link>
         </nav>
       </header>

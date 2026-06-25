@@ -1,6 +1,7 @@
 'use client';
 
 import { FormationCaseHeader, FormationDetailGuard, useFormationCaseId, useSortedChecklistSteps } from '../shared';
+import { ChecklistIntroBanner } from './checklist-intro-banner';
 import { useAppDispatch } from '@/store';
 import { updateFormationChecklistStepThunk } from '@/store/thunks';
 import type { FormationChecklistStepStatus } from '@/model/formation';
@@ -33,6 +34,7 @@ export const FormationChecklistTab = () => {
   return (
     <FormationDetailGuard>
       <FormationCaseHeader />
+      <ChecklistIntroBanner />
       <ul className={styles.list}>
         {rows.map(({ step, status }) => (
           <li key={step.id} className={styles.item}>

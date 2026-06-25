@@ -44,7 +44,7 @@ export const SetupPage = () => {
         <ol className={styles.steps}>
           <li>Create a Supabase project and run the SQL runbook (see wire-contract.md).</li>
           <li>Copy <code className={styles.code}>.env.example</code> to <code className={styles.code}>.env</code> in Express and set keys.</li>
-          <li>Start Express on port 3011 and this app on port 3010.</li>
+          <li>Start Express on port 3080 and this app on port 3081.</li>
         </ol>
       </section>
     </AppShell>

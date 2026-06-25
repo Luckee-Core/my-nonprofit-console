@@ -24,6 +24,7 @@ ADRs keep implementation consistent by documenting:
 8. [008 – Detail page routing](./008-detail-page-routing.md) — `{entity}-detail-page`, no `[id]` routes.
 9. [009 – Formation wizard UI](./009-formation-wizard-ui.md) — Dashboard, checklist, board, documents, filings.
 10. [010 – Tenant Supabase via Express](./010-tenant-supabase-via-express.md) — User-provided Supabase, setup status.
+11. [011 – Getting started wizard](./011-getting-started-wizard.md) — Onboarding, setup gate, plain-language UX.
 
 ## How to use
 

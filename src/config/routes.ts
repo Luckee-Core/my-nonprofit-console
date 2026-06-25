@@ -1,5 +1,6 @@
 export const LANDING_PATH = '/';
 export const SETUP_PATH = '/setup';
+export const GETTING_STARTED_PATH = '/getting-started';
 export const DASHBOARD_PATH = '/dashboard';
 export const FORMATION_DETAIL_PAGE_PATH = '/formation-detail-page';
 export const FORMATION_CHECKLIST_PATH = '/formation-detail-page/checklist';

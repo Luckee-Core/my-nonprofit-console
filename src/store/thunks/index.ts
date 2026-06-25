@@ -1,4 +1,5 @@
 export { loadSetupStatusThunk } from './setup/load-setup-status-thunk';
+export { advanceGettingStartedStepThunk, completeGettingStartedThunk } from './getting-started';
 export { fetchFormationCasesThunk } from './formation-cases/fetch-formation-cases-thunk';
 export { createFormationCaseThunk } from './formation-cases/create-formation-case-thunk';
 export { openFormationCaseThunk } from './formation-cases/open-formation-case-thunk';

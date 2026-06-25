@@ -11,7 +11,7 @@ export const createFormationCaseThunk =
   async (dispatch) => {
     const trimmed = workingName.trim();
     if (!trimmed) {
-      dispatch(DashboardBuilderActions.setDashboardError('Working name is required'));
+      dispatch(DashboardBuilderActions.setDashboardError('Enter a working name for your nonprofit.'));
       return 400;
     }
 
@@ -20,7 +20,7 @@ export const createFormationCaseThunk =
     dispatch(DashboardBuilderActions.setDashboardCreating(false));
 
     if (!result.success || !result.data) {
-      dispatch(DashboardBuilderActions.setDashboardError(result.error ?? 'Failed to create case'));
+      dispatch(DashboardBuilderActions.setDashboardError(result.error ?? 'Failed to create nonprofit'));
       return result.httpStatus === 400 ? 400 : 500;
     }
 

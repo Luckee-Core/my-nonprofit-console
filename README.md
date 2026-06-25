@@ -5,8 +5,8 @@ Local-first OSS Next.js app for Pennsylvania / Philadelphia nonprofit formation.
 ## Quick start
 
 1. Create a Supabase project and run SQL from `../my-nonprofit-express-server/docs/` (see `docs/wire-contract.md`).
-2. Configure and start the Express server (`PORT=3011`).
-3. `npm install && npm run dev` (web on port **3010**).
+2. Configure and start the Express server (`PORT=3080`).
+3. `npm install && npm run dev` (web on port **3081** — set `PORT=3081` in `.env`).
 4. Visit `/setup`, then `/dashboard` to create a formation case.
 
 ## Features (v1)
