@@ -1,7 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { FormationCaseHeader, FormationDetailGuard, useFormationCaseId } from '../shared';
+import { FormationCaseHeader, FormationDetailGuard } from '../shared';
+import { OfficerRow } from './officer-row';
+import { OFFICER_ROLES } from './constants';
 import { useAppDispatch, useAppSelector } from '@/store';
 import {
   createFormationBoardMemberThunk,
@@ -9,36 +11,36 @@ import {
   upsertFormationOfficerThunk,
 } from '@/store/thunks';
 
-const OFFICER_ROLES = ['president', 'secretary', 'treasurer'] as const;
-
 /**
  * Board tab — directors and officers.
  */
 export const FormationBoardTab = () => {
   const dispatch = useAppDispatch();
-  const caseId = useFormationCaseId();
-  const membersDump = useAppSelector((s) => s.formationBoardMembers);
-  const officersDump = useAppSelector((s) => s.formationOfficers);
+  const currentFormationCase = useAppSelector((s) => s.currentFormationCase);
+  const formationBoardMembers = useAppSelector((s) => s.formationBoardMembers);
+  const formationOfficers = useAppSelector((s) => s.formationOfficers);
+  const caseId = currentFormationCase.id;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
   const members = useMemo(
-    () => Object.values(membersDump).filter((m) => m.formation_case_id === caseId),
-    [membersDump, caseId],
+    () => Object.values(formationBoardMembers).filter((m) => m.formation_case_id === caseId),
+    [formationBoardMembers, caseId],
   );
 
   const officers = useMemo(
-    () => Object.values(officersDump).filter((o) => o.formation_case_id === caseId),
-    [officersDump, caseId],
+    () => Object.values(formationOfficers).filter((o) => o.formation_case_id === caseId),
+    [formationOfficers, caseId],
   );
 
   const officerByRole = useMemo(() => {
-    const map = new Map(officers.map((o) => [o.role, o]));
-    return map;
+    return new Map(officers.map((o) => [o.role, o]));
   }, [officers]);
 
   const handleAddMember = () => {
-    void dispatch(createFormationBoardMemberThunk({ formation_case_id: caseId, full_name: name, email }));
+    void dispatch(
+      createFormationBoardMemberThunk({ formation_case_id: caseId, full_name: name, email }),
+    );
     setName('');
     setEmail('');
   };
@@ -91,7 +93,6 @@ export const FormationBoardTab = () => {
           <OfficerRow
             key={role}
             role={role}
-            caseId={caseId}
             initialName={officerByRole.get(role)?.full_name ?? ''}
             onSave={(full_name) =>
               void dispatch(upsertFormationOfficerThunk({ formation_case_id: caseId, role, full_name }))
@@ -100,34 +101,6 @@ export const FormationBoardTab = () => {
         ))}
       </section>
     </FormationDetailGuard>
-  );
-};
-
-const OfficerRow = ({
-  role,
-  initialName,
-  onSave,
-}: {
-  role: string;
-  caseId: string;
-  initialName: string;
-  onSave: (name: string) => void;
-}) => {
-  const [fullName, setFullName] = useState(initialName);
-
-  return (
-    <div className={styles.officerRow}>
-      <label className={styles.officerLabel}>{role}</label>
-      <input
-        className={styles.input}
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-        placeholder="Officer name"
-      />
-      <button type="button" className={styles.button} onClick={() => onSave(fullName.trim())}>
-        Save
-      </button>
-    </div>
   );
 };
 
@@ -140,6 +113,4 @@ const styles = {
   list: `divide-y divide-slate-100 rounded border border-slate-200 bg-white`,
   listItem: `flex items-center justify-between px-3 py-2 text-sm`,
   linkDanger: `text-sm text-red-600`,
-  officerRow: `mb-2 flex flex-wrap items-center gap-2`,
-  officerLabel: `w-24 text-sm font-medium capitalize text-slate-700`,
 };

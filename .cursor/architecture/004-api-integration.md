@@ -4,6 +4,28 @@
 
 Define one consistent API integration pattern for this Next.js codebase so data flow, typing, and error handling are predictable.
 
+## My Nonprofit implementation (actual)
+
+This product uses a simplified layout:
+
+```text
+src/api/
+  _shared/
+    request-api.ts    # same-origin fetch + parseApiJson
+    parse-api-json.ts
+    types.ts          # ApiResult<T> with success/error envelope
+  formation-cases/
+  formation-checklist/
+  …                   # one folder per Express domain
+  api-docs/
+```
+
+- Browser calls same-origin `/api/*`; Next rewrites to Express (`EXPRESS_API_URL`).
+- Express returns `{ success: true, data }` / `{ success: false, error }` — parsed by `parseApiJson`.
+- Thunks in `src/store/thunks/` call `src/api/{domain}/` functions; components never call API directly.
+
+The `ok: true/false` `ApiResponse` and `client.ts`/`service.ts` split below are **template reference** — not used in this repo.
+
 ## Required Rules
 
 1. **API functions live in `src/api/{domain}/` only.**

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { AppShell } from '@/components/AppShell';
+import { AppShell, StatusBadge } from '@/components';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { loadSetupStatusThunk } from '@/store/thunks';
 
@@ -10,9 +10,8 @@ import { loadSetupStatusThunk } from '@/store/thunks';
  */
 export const SetupPage = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((s) => s.setupBuilder.isLoading);
-  const status = useAppSelector((s) => s.setupBuilder.lastStatus);
-  const error = useAppSelector((s) => s.setupBuilder.lastError);
+  const setupBuilder = useAppSelector((s) => s.setupBuilder);
+  const { isLoading, lastStatus: status, lastError: error } = setupBuilder;
 
   useEffect(() => {
     void dispatch(loadSetupStatusThunk());
@@ -43,22 +42,14 @@ export const SetupPage = () => {
 
         <ol className={styles.steps}>
           <li>Create a Supabase project and run the SQL runbook (see wire-contract.md).</li>
-          <li>Copy <code className={styles.code}>.env.example</code> to <code className={styles.code}>.env</code> in Express and set keys.</li>
+          <li>
+            Copy <code className={styles.code}>.env.example</code> to{' '}
+            <code className={styles.code}>.env</code> in Express and set keys.
+          </li>
           <li>Start Express on port 3080 and this app on port 3081.</li>
         </ol>
       </section>
     </AppShell>
-  );
-};
-
-const StatusBadge = ({ value, message }: { value: string; message?: string }) => {
-  const tone =
-    value === 'ok' ? styles.badgeOk : value === 'missing' ? styles.badgeMissing : styles.badgeError;
-  return (
-    <span>
-      <span className={`${styles.badge} ${tone}`}>{value}</span>
-      {message ? <span className={styles.muted}> — {message}</span> : null}
-    </span>
   );
 };
 
@@ -71,9 +62,5 @@ const styles = {
   code: `rounded bg-slate-100 px-1.5 py-0.5 text-sm`,
   list: `rounded-lg border border-slate-200 bg-white p-4`,
   listItem: `py-1 text-sm`,
-  badge: `rounded px-2 py-0.5 text-xs font-medium uppercase`,
-  badgeOk: `bg-green-100 text-green-800`,
-  badgeMissing: `bg-amber-100 text-amber-800`,
-  badgeError: `bg-red-100 text-red-800`,
   steps: `list-decimal space-y-2 pl-5 text-sm text-slate-600`,
 };

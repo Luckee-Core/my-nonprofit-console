@@ -8,7 +8,8 @@ import { GettingStartedBuilderActions } from '@/store/builders/gettingStartedBui
  */
 export const ChecklistIntroBanner = () => {
   const dispatch = useAppDispatch();
-  const dismissed = useAppSelector((s) => s.gettingStartedBuilder.checklistIntroDismissed);
+  const gettingStartedBuilder = useAppSelector((s) => s.gettingStartedBuilder);
+  const { checklistIntroDismissed: dismissed } = gettingStartedBuilder;
 
   if (dismissed) {
     return null;

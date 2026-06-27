@@ -13,8 +13,8 @@ import { StepCard } from '../shared/step-card';
 export const NameStep = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const isCompleting = useAppSelector((s) => s.gettingStartedBuilder.isCompleting);
-  const lastError = useAppSelector((s) => s.gettingStartedBuilder.lastError);
+  const gettingStartedBuilder = useAppSelector((s) => s.gettingStartedBuilder);
+  const { isCompleting, lastError } = gettingStartedBuilder;
   const [workingName, setWorkingName] = useState('');
 
   const trimmed = useMemo(() => workingName.trim(), [workingName]);

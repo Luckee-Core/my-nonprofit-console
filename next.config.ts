@@ -1,14 +1,26 @@
 import type { NextConfig } from 'next';
 
+const resolveExpressTarget = (): string => {
+  const target =
+    process.env.EXPRESS_API_URL?.trim() ||
+    process.env.FORMATION_EXPRESS_INTERNAL_URL?.trim() ||
+    (process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3080' : '');
+
+  if (!target && process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'EXPRESS_API_URL (or FORMATION_EXPRESS_INTERNAL_URL) is required when NODE_ENV=production',
+    );
+  }
+
+  return target;
+};
+
 /**
  * Same-origin rewrites to Express when no matching App Router BFF route exists.
  */
 const nextConfig: NextConfig = {
   async rewrites() {
-    const target =
-      process.env.EXPRESS_API_URL?.trim() ||
-      process.env.FORMATION_EXPRESS_INTERNAL_URL?.trim() ||
-      (process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:3080' : '');
+    const target = resolveExpressTarget();
 
     if (!target) {
       return [];
@@ -23,6 +35,7 @@ const nextConfig: NextConfig = {
       { source: '/api/formation-documents/:path*', destination: `${base}/api/formation-documents/:path*` },
       { source: '/api/formation-filings/:path*', destination: `${base}/api/formation-filings/:path*` },
       { source: '/api/health', destination: `${base}/api/health` },
+      { source: '/api-docs.json', destination: `${base}/api-docs.json` },
     ];
   },
 };

@@ -20,7 +20,7 @@ New users landed on a dashboard labeled "Formation cases" with no explanation of
 2. **Connect** — setup probe via `loadSetupStatusThunk`; **Continue** blocked until `supabase === 'ok'`
 3. **Name** — working name form; create + `openFormationCaseThunk` → checklist
 
-Query `?step=name` opens step 3 directly (e.g. "Start another nonprofit" from dashboard).
+Query `?step=name` opens step 3 directly (e.g. "Start another nonprofit" from dashboard). This is **onboarding navigation only** — ADR 008 forbids query params for entity id; formation identity stays in `currentFormationCase`.
 
 ### Terminology (UI only)
 

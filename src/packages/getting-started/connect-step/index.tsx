@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { StatusBadge } from '@/components';
 import { SETUP_PATH } from '@/config/routes';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { advanceGettingStartedStepThunk, loadSetupStatusThunk } from '@/store/thunks';
@@ -12,10 +13,10 @@ import { StepCard } from '../shared/step-card';
  */
 export const ConnectStep = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector((s) => s.setupBuilder.isLoading);
-  const status = useAppSelector((s) => s.setupBuilder.lastStatus);
-  const setupError = useAppSelector((s) => s.setupBuilder.lastError);
-  const lastError = useAppSelector((s) => s.gettingStartedBuilder.lastError);
+  const setupBuilder = useAppSelector((s) => s.setupBuilder);
+  const gettingStartedBuilder = useAppSelector((s) => s.gettingStartedBuilder);
+  const { isLoading, lastStatus: status, lastError: setupError } = setupBuilder;
+  const { lastError } = gettingStartedBuilder;
 
   const supabaseOk = status?.supabase === 'ok';
   const anthropicOk = status?.anthropic === 'ok';
@@ -23,14 +24,6 @@ export const ConnectStep = () => {
   useEffect(() => {
     void dispatch(loadSetupStatusThunk());
   }, [dispatch]);
-
-  const handleContinue = () => {
-    void dispatch(advanceGettingStartedStepThunk());
-  };
-
-  const handleRecheck = () => {
-    void dispatch(loadSetupStatusThunk());
-  };
 
   return (
     <StepCard>
@@ -55,7 +48,11 @@ export const ConnectStep = () => {
       </ol>
 
       <div className={styles.statusRow}>
-        <button type="button" className={styles.secondaryButton} onClick={() => void handleRecheck()}>
+        <button
+          type="button"
+          className={styles.secondaryButton}
+          onClick={() => void dispatch(loadSetupStatusThunk())}
+        >
           {isLoading ? 'Checking…' : 'Recheck connection'}
         </button>
         <Link href={SETUP_PATH} className={styles.link}>
@@ -89,7 +86,7 @@ export const ConnectStep = () => {
         type="button"
         className={styles.primaryButton}
         disabled={!supabaseOk || isLoading}
-        onClick={handleContinue}
+        onClick={() => void dispatch(advanceGettingStartedStepThunk())}
       >
         Continue
       </button>
@@ -97,17 +94,6 @@ export const ConnectStep = () => {
         <p className={styles.hint}>Fix Supabase connection above, then recheck.</p>
       ) : null}
     </StepCard>
-  );
-};
-
-const StatusBadge = ({ value, message }: { value: string; message?: string }) => {
-  const tone =
-    value === 'ok' ? styles.badgeOk : value === 'missing' ? styles.badgeMissing : styles.badgeError;
-  return (
-    <span>
-      <span className={`${styles.badge} ${tone}`}>{value}</span>
-      {message ? <span className={styles.muted}> — {message}</span> : null}
-    </span>
   );
 };
 
@@ -122,11 +108,6 @@ const styles = {
   error: `mt-3 text-sm text-red-600`,
   statusList: `mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4`,
   statusItem: `py-1 text-sm`,
-  badge: `rounded px-2 py-0.5 text-xs font-medium uppercase`,
-  badgeOk: `bg-green-100 text-green-800`,
-  badgeMissing: `bg-amber-100 text-amber-800`,
-  badgeError: `bg-red-100 text-red-800`,
-  muted: `text-slate-500`,
   warning: `mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900`,
   primaryButton: `mt-6 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50`,
   hint: `mt-2 text-sm text-slate-500`,

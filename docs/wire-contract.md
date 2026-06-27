@@ -10,8 +10,9 @@
 | **Default API port** | 3080 |
 | **API base env (web)** | `EXPRESS_API_URL` (server-side rewrites) |
 | **Proxy mechanism** | Next.js `rewrites()` in `next.config.ts` |
-| **Health endpoint** | `GET /api/health` |
-| **Auth (OSS default)** | None locally; optional `FORMATION_API_SECRET` |
+| **Health endpoint** | `GET /api/health` → `{ success: true, data: { status, message, … } }` |
+| **API docs** | `GET /api-docs.json` (rewritten); UI at `/docs/api` |
+| **Auth (OSS default)** | None locally; optional `FORMATION_API_SECRET` (forwarded by Next middleware) |
 
 ## Environment variables
 
@@ -19,8 +20,8 @@
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
-| `EXPRESS_API_URL` | Dev optional | Rewrite target (default `http://127.0.0.1:3080`) |
-| `FORMATION_API_SECRET` | No | Must match Express when set |
+| `EXPRESS_API_URL` | **Yes in production** | Rewrite target (dev default `http://127.0.0.1:3080`) |
+| `FORMATION_API_SECRET` | No | Server-side only; forwarded to Express via `src/middleware.ts` |
 
 Never put `SUPABASE_*` or `ANTHROPIC_API_KEY` in `NEXT_PUBLIC_*`.
 

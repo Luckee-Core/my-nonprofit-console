@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { AppShell } from '@/components/AppShell';
+import { AppShell } from '@/components';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { GettingStartedBuilderActions } from '@/store/builders/gettingStartedBuilder';
 import { ConnectStep } from './connect-step';
@@ -16,7 +16,8 @@ import { WelcomeStep } from './welcome-step';
 export const GettingStartedPage = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const activeStep = useAppSelector((s) => s.gettingStartedBuilder.activeStep);
+  const gettingStartedBuilder = useAppSelector((s) => s.gettingStartedBuilder);
+  const { activeStep } = gettingStartedBuilder;
 
   useEffect(() => {
     const stepParam = searchParams.get('step');
