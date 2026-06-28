@@ -3,13 +3,13 @@
 import { useMemo } from 'react';
 import { FormationCaseHeader, FormationDetailGuard } from '../shared';
 import { ChecklistIntroBanner } from './checklist-intro-banner';
-import { ChecklistStepRow } from './checklist-step-row';
+import { ChecklistStepAccordion } from './checklist-step-accordion';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { updateFormationChecklistStepThunk } from '@/store/thunks';
 import type { FormationChecklistStepStatus } from '@/model/formation';
 
 /**
- * Checklist tab — update per-step progress.
+ * Checklist tab — expandable steps with in-app forms and trackers.
  */
 export const FormationChecklistTab = () => {
   const dispatch = useAppDispatch();
@@ -29,11 +29,13 @@ export const FormationChecklistTab = () => {
   }, [formationChecklistSteps, formationCaseStepStatus, caseId]);
 
   const handleStatusChange = (checklistStepId: string, status: FormationChecklistStepStatus) => {
+    const existing = rows.find((r) => r.step.id === checklistStepId)?.status;
     void dispatch(
       updateFormationChecklistStepThunk({
         formation_case_id: caseId,
         checklist_step_id: checklistStepId,
         status,
+        notes: existing?.notes,
       }),
     );
   };
@@ -44,7 +46,7 @@ export const FormationChecklistTab = () => {
       <ChecklistIntroBanner />
       <ul className={styles.list}>
         {rows.map(({ step, status }) => (
-          <ChecklistStepRow
+          <ChecklistStepAccordion
             key={step.id}
             step={step}
             status={status}

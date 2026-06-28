@@ -1,5 +1,6 @@
-import { FormationDocumentsTab } from '@/packages/formation-detail-page/documents';
+import { redirect } from 'next/navigation';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 
 export default function Page() {
-  return <FormationDocumentsTab />;
+  redirect(FORMATION_WORKSPACE_PATH);
 }

@@ -22,8 +22,9 @@ export const SetupPage = () => {
       <section className={styles.section}>
         <h1 className={styles.title}>Setup</h1>
         <p className={styles.subtitle}>
-          Connect your Supabase project and Express server. Run SQL from{' '}
-          <code className={styles.code}>my-nonprofit-express-server/docs/</code> first.
+          Connect your Supabase project and Express server. Run{' '}
+          <code className={styles.code}>my-nonprofit-express-server/docs/supabase-setup.sql</code>{' '}
+          first.
         </p>
 
         {isLoading ? <p className={styles.muted}>Checking connectivity…</p> : null}

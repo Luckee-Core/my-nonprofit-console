@@ -1,5 +1,6 @@
-import { FormationDetailHubPage } from '@/packages/formation-detail-page';
+import { redirect } from 'next/navigation';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 
 export default function Page() {
-  return <FormationDetailHubPage />;
+  redirect(FORMATION_WORKSPACE_PATH);
 }

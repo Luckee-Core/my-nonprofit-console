@@ -1,5 +1,6 @@
-import { FormationFilingsTab } from '@/packages/formation-detail-page/filings';
+import { redirect } from 'next/navigation';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 
 export default function Page() {
-  return <FormationFilingsTab />;
+  redirect(FORMATION_WORKSPACE_PATH);
 }

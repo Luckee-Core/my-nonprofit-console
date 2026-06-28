@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components';
-import { FORMATION_DETAIL_PAGE_PATH, GETTING_STARTED_PATH } from '@/config/routes';
+import { FORMATION_WORKSPACE_PATH, GETTING_STARTED_PATH } from '@/config/routes';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { fetchFormationCasesThunk, openFormationCaseThunk } from '@/store/thunks';
 import { DashboardHeader } from './dashboard-header';
@@ -29,19 +29,19 @@ export const DashboardPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isLoading && nonprofits.length === 0) {
+    if (!isLoading && !lastError && nonprofits.length === 0) {
       router.replace(GETTING_STARTED_PATH);
     }
-  }, [isLoading, nonprofits.length, router]);
+  }, [isLoading, lastError, nonprofits.length, router]);
 
   const handleContinue = async (id: string) => {
     const code = await dispatch(openFormationCaseThunk(id));
     if (code === 200) {
-      router.push(FORMATION_DETAIL_PAGE_PATH);
+      router.push(FORMATION_WORKSPACE_PATH);
     }
   };
 
-  if (!isLoading && nonprofits.length === 0) {
+  if (!isLoading && !lastError && nonprofits.length === 0) {
     return null;
   }
 

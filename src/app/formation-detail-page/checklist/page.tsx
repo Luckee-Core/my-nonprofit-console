@@ -1,5 +1,6 @@
-import { FormationChecklistTab } from '@/packages/formation-detail-page/checklist';
+import { redirect } from 'next/navigation';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 
 export default function Page() {
-  return <FormationChecklistTab />;
+  redirect(FORMATION_WORKSPACE_PATH);
 }

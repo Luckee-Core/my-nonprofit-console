@@ -2,11 +2,8 @@
 
 import Link from 'next/link';
 import {
+  AI_PROMPTS_PATH,
   DASHBOARD_PATH,
-  FORMATION_BOARD_PATH,
-  FORMATION_CHECKLIST_PATH,
-  FORMATION_DOCUMENTS_PATH,
-  FORMATION_FILINGS_PATH,
   GETTING_STARTED_PATH,
   LANDING_PATH,
   SETUP_PATH,
@@ -14,13 +11,12 @@ import {
 
 type AppShellProps = {
   children: React.ReactNode;
-  showFormationNav?: boolean;
 };
 
 /**
- * Shared chrome for dashboard and formation wizard pages.
+ * Shared chrome — header and footer; formation workspace uses its own sidebar.
  */
-export const AppShell = ({ children, showFormationNav = false }: AppShellProps) => {
+export const AppShell = ({ children }: AppShellProps) => {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -37,24 +33,11 @@ export const AppShell = ({ children, showFormationNav = false }: AppShellProps) 
           <Link href={DASHBOARD_PATH} className={styles.navLink}>
             Your nonprofits
           </Link>
+          <Link href={AI_PROMPTS_PATH} className={styles.navLink}>
+            AI Prompts
+          </Link>
         </nav>
       </header>
-      {showFormationNav ? (
-        <nav className={styles.subNav}>
-          <Link href={FORMATION_CHECKLIST_PATH} className={styles.subNavLink}>
-            Checklist
-          </Link>
-          <Link href={FORMATION_BOARD_PATH} className={styles.subNavLink}>
-            Board
-          </Link>
-          <Link href={FORMATION_DOCUMENTS_PATH} className={styles.subNavLink}>
-            Documents
-          </Link>
-          <Link href={FORMATION_FILINGS_PATH} className={styles.subNavLink}>
-            Filings
-          </Link>
-        </nav>
-      ) : null}
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>
         <p className={styles.disclaimer}>
@@ -71,9 +54,7 @@ const styles = {
   brand: `text-lg font-semibold text-slate-900`,
   nav: `flex gap-4`,
   navLink: `text-sm text-slate-600 hover:text-slate-900`,
-  subNav: `flex gap-4 border-b border-slate-200 bg-white px-6 py-3`,
-  subNavLink: `text-sm font-medium text-slate-700 hover:text-slate-900`,
-  main: `mx-auto max-w-5xl px-6 py-8`,
+  main: `mx-auto w-full`,
   footer: `border-t border-slate-200 bg-white px-6 py-4`,
   disclaimer: `text-center text-xs text-slate-500`,
 };

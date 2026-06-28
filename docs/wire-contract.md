@@ -38,9 +38,7 @@ Never put `SUPABASE_*` or `ANTHROPIC_API_KEY` in `NEXT_PUBLIC_*`.
 
 ## Supabase runbook (Express `docs/`)
 
-1. `docs/formation-postgres-schema.sql`
-2. `docs/formation-ai-prompts-v1.sql`
-3. `docs/supabase-error-log-schema.sql` (optional)
+Run **`docs/supabase-setup.sql`** once in the Supabase SQL Editor.
 
 ## Local dev
 

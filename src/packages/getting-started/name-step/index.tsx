@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FORMATION_CHECKLIST_PATH } from '@/config/routes';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { completeGettingStartedThunk } from '@/store/thunks';
 import { StepCard } from '../shared/step-card';
@@ -23,7 +23,7 @@ export const NameStep = () => {
   const handleSubmit = async () => {
     const code = await dispatch(completeGettingStartedThunk(workingName));
     if (code === 200) {
-      router.push(FORMATION_CHECKLIST_PATH);
+      router.push(FORMATION_WORKSPACE_PATH);
     }
   };
 

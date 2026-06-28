@@ -8,7 +8,12 @@ import { FormationOfficersActions } from '@/store/dumps/formationOfficers';
 import type { AppThunk } from '@/store';
 
 export const createFormationBoardMemberThunk =
-  (input: { formation_case_id: string; full_name: string; email?: string }): AppThunk<Promise<200 | 400 | 500>> =>
+  (input: {
+    formation_case_id: string;
+    full_name: string;
+    email?: string;
+    is_incorporator?: boolean;
+  }): AppThunk<Promise<200 | 400 | 500>> =>
   async (dispatch) => {
     const result = await createFormationBoardMember(input);
     if (!result.success || !result.data) {

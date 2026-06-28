@@ -34,6 +34,9 @@ const nextConfig: NextConfig = {
       { source: '/api/formation-board/:path*', destination: `${base}/api/formation-board/:path*` },
       { source: '/api/formation-documents/:path*', destination: `${base}/api/formation-documents/:path*` },
       { source: '/api/formation-filings/:path*', destination: `${base}/api/formation-filings/:path*` },
+      { source: '/api/formation-context/:path*', destination: `${base}/api/formation-context/:path*` },
+      { source: '/api/formation-studio/:path*', destination: `${base}/api/formation-studio/:path*` },
+      { source: '/api/formation-ai-prompts/:path*', destination: `${base}/api/formation-ai-prompts/:path*` },
       { source: '/api/health', destination: `${base}/api/health` },
       { source: '/api-docs.json', destination: `${base}/api-docs.json` },
     ];

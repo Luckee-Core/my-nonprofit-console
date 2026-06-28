@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { AppShell } from '@/components';
+import { DASHBOARD_PATH } from '@/config/routes';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { GettingStartedBuilderActions } from '@/store/builders/gettingStartedBuilder';
+import { fetchFormationCasesThunk } from '@/store/thunks';
 import { ConnectStep } from './connect-step';
 import { NameStep } from './name-step';
 import { WizardProgress } from './shared/wizard-progress';
@@ -15,9 +17,25 @@ import { WelcomeStep } from './welcome-step';
  */
 export const GettingStartedPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const gettingStartedBuilder = useAppSelector((s) => s.gettingStartedBuilder);
+  const formationCases = useAppSelector((s) => s.formationCases);
+  const dashboardBuilder = useAppSelector((s) => s.dashboardBuilder);
   const { activeStep } = gettingStartedBuilder;
+  const { isLoading, lastError } = dashboardBuilder;
+
+  const existingNonprofitCount = useMemo(() => Object.keys(formationCases).length, [formationCases]);
+
+  useEffect(() => {
+    void dispatch(fetchFormationCasesThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isLoading && !lastError && existingNonprofitCount > 0) {
+      router.replace(DASHBOARD_PATH);
+    }
+  }, [existingNonprofitCount, isLoading, lastError, router]);
 
   useEffect(() => {
     const stepParam = searchParams.get('step');
@@ -25,6 +43,10 @@ export const GettingStartedPage = () => {
       dispatch(GettingStartedBuilderActions.setGettingStartedStep('name'));
     }
   }, [dispatch, searchParams]);
+
+  if (!isLoading && !lastError && existingNonprofitCount > 0) {
+    return null;
+  }
 
   return (
     <AppShell>

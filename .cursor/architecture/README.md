@@ -25,7 +25,12 @@ ADRs keep implementation consistent by documenting:
 9. [009 – Formation wizard UI](./009-formation-wizard-ui.md) — Dashboard, checklist, board, documents, filings.
 10. [010 – Tenant Supabase via Express](./010-tenant-supabase-via-express.md) — User-provided Supabase, setup status.
 11. [011 – Getting started wizard](./011-getting-started-wizard.md) — Onboarding, setup gate, plain-language UX.
+12. [012 – Actionable checklist](./012-actionable-checklist.md) — Expandable step panels, in-app forms.
 12. [012 – Package layout (My Nonprofit)](./012-package-layout.md) — `src/packages/` screen map and tab conventions.
+13. [013 – Formation workspace sidebar](./013-formation-workspace-sidebar.md) — Left sidebar, all steps, workspace panes.
+14. [014 – Formation context facts](./014-formation-context-facts.md) — Per-case facts feeding AI studios.
+15. [015 – Formation AI studios](./015-formation-ai-studios.md) — Three-table pattern, six text domains.
+16. [016 – AI prompts admin](./016-ai-prompts-admin.md) — Prompt versioning UI.
 
 **Note:** [010 – Public blog express fetch](./010-public-blog-express-fetch.md) is template carryover — N/A for this product. See [010 – Tenant Supabase via Express](./010-tenant-supabase-via-express.md).
 

@@ -36,9 +36,8 @@ export const ConnectStep = () => {
       <ol className={styles.steps}>
         <li>Create a Supabase project at supabase.com</li>
         <li>
-          Run the SQL files from{' '}
-          <code className={styles.code}>my-nonprofit-express-server/docs/</code> (schema, then AI
-          prompts)
+          Run <code className={styles.code}>my-nonprofit-express-server/docs/supabase-setup.sql</code>{' '}
+          in the Supabase SQL Editor
         </li>
         <li>
           Copy <code className={styles.code}>.env.example</code> to{' '}

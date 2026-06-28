@@ -1,5 +1,6 @@
-import { FormationBoardTab } from '@/packages/formation-detail-page/board';
+import { redirect } from 'next/navigation';
+import { FORMATION_WORKSPACE_PATH } from '@/config/routes';
 
 export default function Page() {
-  return <FormationBoardTab />;
+  redirect(FORMATION_WORKSPACE_PATH);
 }

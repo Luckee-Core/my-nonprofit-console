@@ -18,8 +18,9 @@ export const ChecklistIntroBanner = () => {
   return (
     <div className={styles.banner} role="status">
       <p className={styles.text}>
-        You are in your checklist — 12 steps for PA / Philadelphia formation. Mark steps as you go;
-        use the <strong>Board</strong> and <strong>Documents</strong> tabs when you are ready.
+        You are in your checklist — 12 steps for PA / Philadelphia formation. Expand a step to fill in
+        details, generate drafts, and track filings. Mark status as you go; use Board and Documents
+        tabs for a full-screen view.
       </p>
       <button
         type="button"

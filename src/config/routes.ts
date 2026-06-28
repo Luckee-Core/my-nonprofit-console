@@ -2,6 +2,12 @@ export const LANDING_PATH = '/';
 export const SETUP_PATH = '/setup';
 export const GETTING_STARTED_PATH = '/getting-started';
 export const DASHBOARD_PATH = '/dashboard';
+export const FORMATION_WORKSPACE_PATH = '/formation-workspace-page';
+export const FORMATION_FACTS_PATH = '/formation-facts-page';
+export const FORMATION_BOARD_MEMBER_DETAIL_PATH = '/formation-board-member-detail-page';
+export const AI_PROMPTS_PATH = '/ai-prompts';
+export const AI_PROMPT_DETAIL_PATH = '/ai-prompt-detail-page';
+/** @deprecated Use FORMATION_WORKSPACE_PATH */
 export const FORMATION_DETAIL_PAGE_PATH = '/formation-detail-page';
 export const FORMATION_CHECKLIST_PATH = '/formation-detail-page/checklist';
 export const FORMATION_BOARD_PATH = '/formation-detail-page/board';

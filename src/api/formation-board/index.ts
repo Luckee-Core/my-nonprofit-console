@@ -40,3 +40,18 @@ export const upsertFormationOfficer = (body: {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
+
+export const updateFormationBoardMember = (body: {
+  id: string;
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  address?: Record<string, string>;
+  is_incorporator?: boolean;
+  sort_order?: number;
+}) =>
+  requestApi<FormationBoardMember>('/api/formation-board/update-member', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
